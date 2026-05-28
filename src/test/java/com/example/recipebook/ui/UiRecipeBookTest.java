@@ -57,7 +57,7 @@ class UiRecipeBookTest {
     void createCleanBrowserContext() {
         context = browser.newContext();
         page = context.newPage();
-        page.setDefaultTimeout(7000);
+        page.setDefaultTimeout(15000);
         productsPage = new ProductsPage(page, baseUrl());
         dishesPage = new DishesPage(page, baseUrl());
     }

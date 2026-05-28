@@ -37,6 +37,15 @@ public abstract class BasePage {
                 .first();
     }
 
+    protected void waitForApiResponse(String path, String method, Runnable action) {
+        page.waitForResponse(
+                response -> response.url().contains(path)
+                        && method.equals(response.request().method())
+                        && response.status() < 400,
+                action
+        );
+    }
+
     public String acceptAlertAfter(Runnable action) {
         AtomicReference<String> message = new AtomicReference<>();
         page.onceDialog(dialog -> {

@@ -52,7 +52,7 @@ public class DishesPage extends BasePage {
     }
 
     public DishesPage save() {
-        page.locator("#d-save").click();
+        waitForApiResponse("/api/dishes", "GET", () -> page.locator("#d-save").click());
         return this;
     }
 

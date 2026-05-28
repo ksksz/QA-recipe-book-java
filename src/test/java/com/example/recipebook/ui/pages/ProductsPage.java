@@ -33,7 +33,7 @@ public class ProductsPage extends BasePage {
     }
 
     public ProductsPage save() {
-        saveButton().click();
+        waitForApiResponse("/api/products", "GET", () -> saveButton().click());
         return this;
     }
 
