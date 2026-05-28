@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Maven / Java build output
+target/
+*.class
+
+# Logs
+*.log
+
+# Runtime uploads
+uploads/
+
+# H2 runtime files
+*.lock.db
+*.trace.db
+*.temp.db
+
+# Local environment files
+.env
+.env.*
