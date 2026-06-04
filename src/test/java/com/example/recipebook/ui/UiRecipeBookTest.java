@@ -32,7 +32,6 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 class UiRecipeBookTest {
     private static Playwright playwright;
     private static Browser browser;
-
     @LocalServerPort
     private int port;
 
