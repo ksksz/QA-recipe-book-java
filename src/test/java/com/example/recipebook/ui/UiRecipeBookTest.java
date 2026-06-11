@@ -66,19 +66,16 @@ class UiRecipeBookTest {
         if (context != null) context.close();
     }
 
-    /**
-     * АГЗ: калорийность продукта
-     */
     @ParameterizedTest(name = "calories={0}, saved={1}")
     @CsvSource({
             "-0.1, false",
             "0, true",
             "0.1, true"
     })
-    @DisplayName("Проверяет нижнюю границу калорийности продукта через UI")
+    @DisplayName("Проверяет нижнюю границу калорийности продукта через интерфейс")
     void shouldValidateProductCaloriesLowerBoundaryThroughUi(String calories, boolean saved) {
         productsPage.open();
-        String name = uniqueName("UI Calorie");
+        String name = uniqueName("Интерфейс Калорийность");
 
         productsPage.fillForm(productForm(name, calories, "0", "0", "0", "Овощи", "Готовый к употреблению", true));
 
@@ -92,18 +89,13 @@ class UiRecipeBookTest {
         }
     }
 
-    /**
-     * АГЗ: название длиной 1 символ - невалидный класс, длина 2 - норм, длина 3 проверяет соседнее валидное
-     * значение.
-     * Сценарий автоматизирует реальное сохранение формы продукта
-     */
     @ParameterizedTest(name = "nameLengthCase={0}, saved={1}")
     @CsvSource({
             "A, false",
             "Ab, true",
             "Aba, true"
     })
-    @DisplayName("Проверяет нижнюю границу длины названия продукта через UI")
+    @DisplayName("Проверяет нижнюю границу длины названия продукта через интерфейс")
     void shouldValidateProductNameLowerBoundaryThroughUi(String namePrefix, boolean saved) {
         productsPage.open();
         String name = namePrefix;
@@ -120,18 +112,13 @@ class UiRecipeBookTest {
         }
     }
 
-    /**
-     * ЭР: продукты делятся на классы по флагу vegan=true/false.
-     * UI-фильтр должен оставить только карточки валидного для фильтра класса при общем
-     * поисковом токене
-     */
     @Test
-    @DisplayName("Фильтрует продукты по флагу vegan через UI")
+    @DisplayName("Фильтрует продукты по признаку веганского продукта через интерфейс")
     void shouldFilterProductsByVeganFlagThroughUi() {
         productsPage.open();
         String token = runToken();
-        String veganName = "UI Vegan " + token;
-        String meatName = "UI Meat " + token;
+        String veganName = "Интерфейс Веганский " + token;
+        String meatName = "Интерфейс Мясной " + token;
 
         productsPage.fillForm(productForm(veganName, "45", "3", "2", "4", "Овощи", "Готовый к употреблению", true)).save();
         productsPage.fillForm(productForm(meatName, "80", "10", "5", "0", "Мясной", "Требует приготовления", false)).save();
@@ -142,17 +129,13 @@ class UiRecipeBookTest {
         assertThat(productsPage.productCard(veganName)).isVisible();
     }
 
-    /**
-     * ЭР: валидное блюдо состоит из существующего продукта, положительного
-     * количества и допустимой категории
-     */
     @Test
-    @DisplayName("Создаёт блюдо и рассчитывает КБЖУ через UI")
+    @DisplayName("Создаёт блюдо и рассчитывает КБЖУ через интерфейс")
     void shouldCreateDishAndCalculateNutritionThroughUi() {
-        String productName = createUiProduct("UI Potato", "77", "2", "0.4", "16.3", "Овощи", "Требует приготовления", true, true, true);
+        String productName = createUiProduct("Интерфейс Картофель", "77", "2", "0.4", "16.3", "Овощи", "Требует приготовления", true, true, true);
 
         dishesPage.open();
-        String dishName = uniqueName("UI Dish");
+        String dishName = uniqueName("Интерфейс Блюдо");
         dishesPage.fillBaseDishFields(dishName, productName, "100", "250", "Второе")
                 .shouldShowCalculatedNutrition("77", "2", "0.4", "16.3")
                 .save()
@@ -160,19 +143,15 @@ class UiRecipeBookTest {
         assertThat(dishesPage.dishCard(dishName)).containsText("КБЖУ: 77.00 / 2.00 / 0.40 / 16.30");
     }
 
-    /**
-     * АГЗ: количество ингредиента проверяется ниже границы, на 0 и
-     * на минимальном положительном
-     */
     @ParameterizedTest(name = "amount={0}, accepted={1}")
     @CsvSource({
             "-0.01, false",
             "0, false",
             "0.01, true"
     })
-    @DisplayName("Проверяет нижнюю границу количества ингредиента через UI")
+    @DisplayName("Проверяет нижнюю границу количества ингредиента через интерфейс")
     void shouldValidateIngredientAmountLowerBoundaryThroughUi(String amount, boolean accepted) {
-        String productName = createUiProduct("UI Ingredient", "20", "2", "2", "2", "Овощи", "Готовый к употреблению", true, true, true);
+        String productName = createUiProduct("Интерфейс Ингредиент", "20", "2", "2", "2", "Овощи", "Готовый к употреблению", true, true, true);
 
         dishesPage.open();
 
@@ -185,10 +164,6 @@ class UiRecipeBookTest {
         }
     }
 
-    /**
-     * АГЗ: каждый макронутриент продукта может быть равен 100 г на 100 г
-     * продукта, но значение сразу выше границы относится к невалид
-     */
     @ParameterizedTest(name = "{0}={1}, saved={2}")
     @CsvSource({
             "proteins, 100, true",
@@ -198,10 +173,10 @@ class UiRecipeBookTest {
             "carbs, 100, true",
             "carbs, 100.1, false"
     })
-    @DisplayName("Проверяет верхнюю границу БЖУ продукта через UI")
+    @DisplayName("Проверяет верхнюю границу БЖУ продукта через интерфейс")
     void shouldValidateProductMacroUpperBoundaryThroughUi(String macro, String value, boolean saved) {
         productsPage.open();
-        String name = uniqueName("UI Macro Product");
+        String name = uniqueName("Интерфейс Продукт БЖУ");
         String proteins = "proteins".equals(macro) ? value : "0";
         String fats = "fats".equals(macro) ? value : "0";
         String carbs = "carbs".equals(macro) ? value : "0";
@@ -218,21 +193,17 @@ class UiRecipeBookTest {
         }
     }
 
-    /**
-     * АГЗ: размер порции блюда должен быть строго больше 0. Проверяется
-     * значение ниже границы, граница и минимальное положительное
-     */
     @ParameterizedTest(name = "portionSize={0}, saved={1}")
     @CsvSource({
             "-0.1, false",
             "0, false",
             "0.1, true"
     })
-    @DisplayName("Проверяет нижнюю границу размера порции блюда через UI")
+    @DisplayName("Проверяет нижнюю границу размера порции блюда через интерфейс")
     void shouldValidateDishPortionLowerBoundaryThroughUi(String portionSize, boolean saved) {
-        String productName = createUiProduct("UI Portion Ingredient", "0", "0", "0", "0", "Жидкость", "Готовый к употреблению", true, true, true);
+        String productName = createUiProduct("Интерфейс Ингредиент порции", "0", "0", "0", "0", "Жидкость", "Готовый к употреблению", true, true, true);
         dishesPage.open();
-        String dishName = uniqueName("UI Portion Dish");
+        String dishName = uniqueName("Интерфейс Блюдо с порцией");
 
         dishesPage.fillBaseDishFields(dishName, productName, "0.1", portionSize, "Напиток");
 
@@ -246,20 +217,16 @@ class UiRecipeBookTest {
         }
     }
 
-    /**
-     * АГЗ: ручное значение белков в блюде может быть равно размеру порции,
-     * но значение сразу выше порции должно быть
-     */
     @ParameterizedTest(name = "proteins={0}, saved={1}")
     @CsvSource({
             "100, true",
             "100.1, false"
     })
-    @DisplayName("Проверяет верхнюю границу ручных белков относительно порции через UI")
+    @DisplayName("Проверяет верхнюю границу ручных белков относительно порции через интерфейс")
     void shouldValidateManualDishProteinUpperBoundaryThroughUi(String proteins, boolean saved) {
-        String productName = createUiProduct("UI Manual Macro", "10", "1", "1", "1", "Овощи", "Готовый к употреблению", true, true, true);
+        String productName = createUiProduct("Интерфейс Ручное БЖУ", "10", "1", "1", "1", "Овощи", "Готовый к употреблению", true, true, true);
         dishesPage.open();
-        String dishName = uniqueName("UI Macro Dish");
+        String dishName = uniqueName("Интерфейс Блюдо БЖУ");
 
         dishesPage.fillBaseDishFields(dishName, productName, "100", "100", "Второе")
                 .fillManualNutrition("100", proteins, "0", "0");
@@ -272,6 +239,44 @@ class UiRecipeBookTest {
                     .contains("proteins")
                     .contains("Значение не может превышать размер порции блюда");
         }
+    }
+
+    @Test
+    @DisplayName("Отображает каталог продуктов без горизонтального скролла на мобильном viewport")
+    void shouldAdaptProductsCatalogToMobileViewport() {
+        page.setViewportSize(390, 844);
+
+        productsPage.open();
+
+        assertThat(page.locator(".topbar")).isVisible();
+        assertThat(page.locator(".nav-links")).isVisible();
+        assertThat(page.locator("#p-name")).isVisible();
+        assertThat(page.locator("#p-search")).isVisible();
+        assertThat(page.locator("#p-refresh")).isVisible();
+        org.assertj.core.api.Assertions.assertThat(hasNoHorizontalOverflow()).isTrue();
+    }
+
+    @Test
+    @DisplayName("Перестраивает форму и каталог блюд в одну колонку на планшетном viewport")
+    void shouldAdaptDishesPageToTabletViewport() {
+        page.setViewportSize(768, 1024);
+
+        dishesPage.open();
+
+        var createPanelBox = page.locator("#create-dish").boundingBox();
+        var catalogPanelBox = page.locator("main.page-grid > section").nth(1).boundingBox();
+        org.assertj.core.api.Assertions.assertThat(catalogPanelBox.y)
+                .isGreaterThan(createPanelBox.y + createPanelBox.height);
+        assertThat(page.locator("#d-product-select")).isVisible();
+        assertThat(page.locator("#d-save")).isVisible();
+        assertThat(page.locator("#d-search")).isVisible();
+        org.assertj.core.api.Assertions.assertThat(hasNoHorizontalOverflow()).isTrue();
+    }
+
+    private boolean hasNoHorizontalOverflow() {
+        return (boolean) page.evaluate(
+                "() => document.documentElement.scrollWidth <= document.documentElement.clientWidth"
+        );
     }
 
     private String createUiProduct(String prefix, String calories, String proteins, String fats, String carbs,
