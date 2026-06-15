@@ -1,0 +1,33 @@
+[
+   {
+      "end_time" : "2026-06-15 11:18:48 +0700",
+      "host" : "127.0.0.1",
+      "ip" : "127.0.0.1",
+      "port" : "3000",
+      "server_banner" : null,
+      "start_time" : "2026-06-15 11:18:47 +0700",
+      "vulnerabilities" : [
+         {
+            "id" : 999100,
+            "method" : "GET",
+            "msg" : "Uncommon header(s) 'content-disposition' found, with contents: inline;filename=f.txt.",
+            "references" : "",
+            "url" : "/trace.axd"
+         },
+         {
+            "id" : "013587",
+            "method" : "GET",
+            "msg" : "Suggested security header missing: strict-transport-security.",
+            "references" : "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security",
+            "url" : "/"
+         },
+         {
+            "id" : 999990,
+            "method" : "OPTIONS",
+            "msg" : "OPTIONS: Allowed HTTP Methods: GET, HEAD, OPTIONS .",
+            "references" : "",
+            "url" : "/"
+         }
+      ]
+   }
+]

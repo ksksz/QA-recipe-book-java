@@ -1,0 +1,104 @@
+{
+  "version": "1.164.0",
+  "results": [],
+  "errors": [],
+  "paths": {
+    "scanned": [
+      "src/main/java/com/example/recipebook/RecipeBookApplication.java",
+      "src/main/java/com/example/recipebook/controller/ApiExceptionHandler.java",
+      "src/main/java/com/example/recipebook/controller/DishController.java",
+      "src/main/java/com/example/recipebook/controller/FormMapper.java",
+      "src/main/java/com/example/recipebook/controller/MetaController.java",
+      "src/main/java/com/example/recipebook/controller/ProductController.java",
+      "src/main/java/com/example/recipebook/controller/SecurityHeadersFilter.java",
+      "src/main/java/com/example/recipebook/controller/WebConfig.java",
+      "src/main/java/com/example/recipebook/dto/DishDetailsResponse.java",
+      "src/main/java/com/example/recipebook/model/Dish.java",
+      "src/main/java/com/example/recipebook/model/Flags.java",
+      "src/main/java/com/example/recipebook/model/Ingredient.java",
+      "src/main/java/com/example/recipebook/model/Nutrition.java",
+      "src/main/java/com/example/recipebook/model/Product.java",
+      "src/main/java/com/example/recipebook/service/BadRequestException.java",
+      "src/main/java/com/example/recipebook/service/DishService.java",
+      "src/main/java/com/example/recipebook/service/FileStorageService.java",
+      "src/main/java/com/example/recipebook/service/ProductLookup.java",
+      "src/main/java/com/example/recipebook/service/ProductService.java",
+      "src/main/java/com/example/recipebook/service/RecipeConstants.java",
+      "src/main/java/com/example/recipebook/service/Validation.java",
+      "src/main/java/com/example/recipebook/storage/RecipeBookDatabase.java"
+    ]
+  },
+  "time": {
+    "rules": [],
+    "rules_parse_time": 0.0005679130554199219,
+    "profiling_times": {
+      "config_time": 0.4021470546722412,
+      "core_time": 0.3653848171234131,
+      "ignores_time": 0.00007987022399902344,
+      "total_time": 0.7767260074615479
+    },
+    "parsing_time": {
+      "total_time": 0.0,
+      "per_file_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "scanning_time": {
+      "total_time": 0.030585527420043945,
+      "per_file_time": {
+        "mean": 0.0013902512463656342,
+        "std_dev": 0.00001792356895136402
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "matching_time": {
+      "total_time": 0.0,
+      "per_file_and_rule_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_files": []
+    },
+    "tainting_time": {
+      "total_time": 0.0,
+      "per_def_and_rule_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_defs": []
+    },
+    "fixpoint_timeouts": [],
+    "prefiltering": {
+      "project_level_time": 0.0,
+      "file_level_time": 0.0,
+      "rules_with_project_prefilters_ratio": 0.0,
+      "rules_with_file_prefilters_ratio": 1.0,
+      "rules_selected_ratio": 0.011363636363636364,
+      "rules_matched_ratio": 0.011363636363636364
+    },
+    "targets": [],
+    "total_bytes": 0,
+    "max_memory_bytes": 126779392
+  },
+  "engine_requested": "OSS",
+  "skipped_rules": [],
+  "profiling_results": []
+}

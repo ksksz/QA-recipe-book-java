@@ -1,0 +1,32 @@
+{
+  "findings": [
+    {
+      "rule": "security.java-runtime-exec",
+      "file": "security/sast-vulnerable-examples.java",
+      "line": 4,
+      "severity": "ERROR",
+      "message": "Опасный запуск команды ОС."
+    },
+    {
+      "rule": "security.java-sql-string-concatenation",
+      "file": "security/sast-vulnerable-examples.java",
+      "line": 8,
+      "severity": "ERROR",
+      "message": "SQL-запрос собран конкатенацией строк."
+    },
+    {
+      "rule": "security.java-user-controlled-upload-extension",
+      "file": "security/sast-vulnerable-examples.java",
+      "line": 12,
+      "severity": "WARNING",
+      "message": "Имя загружаемого файла получено от пользователя."
+    },
+    {
+      "rule": "security.java-hardcoded-password",
+      "file": "security/sast-vulnerable-examples.java",
+      "line": 17,
+      "severity": "ERROR",
+      "message": "Пароль жестко задан в исходном коде."
+    }
+  ]
+}

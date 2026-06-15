@@ -1,0 +1,25 @@
+{
+  "scannedDependencies": 19,
+  "vulnerableDependencies": [
+    {
+      "dependency": "spring-boot-3.3.5.jar",
+      "vulnerabilityCount": 6,
+      "maximumCvss": 9.8
+    },
+    {
+      "dependency": "tomcat-embed-core-10.1.31.jar",
+      "vulnerabilityCount": 35,
+      "maximumCvss": 9.8
+    },
+    {
+      "dependency": "spring-core-6.1.14.jar",
+      "vulnerabilityCount": 17,
+      "maximumCvss": 7.5
+    },
+    {
+      "dependency": "log4j-api-2.23.1.jar",
+      "vulnerabilityCount": 2,
+      "maximumCvss": 6.9
+    }
+  ]
+}

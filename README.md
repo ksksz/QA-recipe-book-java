@@ -1,20 +1,20 @@
-# Книга рецептов Java
+# Книга рецептов
 
-Второй вариант проекта "Книга рецептов" с тем же интерфейсом и функциональностью, но с Java backend на Spring Boot.
+Второй вариант проекта "Книга рецептов" с тем же интерфейсом и функциональностью, но с серверной частью на Java и Spring Boot.
 
 ## Что внутри
 
-- `src/main/resources/static` — тот же frontend, что и в исходном проекте.
-- `src/main/java` — Java backend с REST API:
+- `src/main/resources/static` — клиентская часть
+- `src/main/java` — серверная часть на Java с REST API:
   - `GET /api/meta`
   - `GET/POST/PUT/DELETE /api/products`
   - `GET/POST/PUT/DELETE /api/dishes`
 - `data/recipebook-db.mv.db` — файловая H2 база данных с таблицами продуктов, блюд и состава блюд.
 - `uploads/` — загруженные фото.
-- `src/test/java/.../DishServiceCalculationTest.java` — unit-тесты автоматического расчёта калорийности и КБЖУ блюда.
-- `src/test/java/.../RecipeBookApiIntegrationTest.java` — интеграционные API-тесты через MockMvc без мокирования backend-слоя.
-- `src/test/java/.../ui/UiRecipeBookTest.java` — системные UI-тесты через Playwright с запуском полноценного Spring Boot backend.
-- `src/test/java/.../ui/pages` — Page Object классы для страниц продуктов и блюд.
+- `src/test/java/.../DishServiceCalculationTest.java` — модульные тесты автоматического расчёта калорийности и КБЖУ блюда
+- `src/test/java/.../RecipeBookApiIntegrationTest.java` — интеграционные API-тесты через MockMvc без имитации серверного слоя
+- `src/test/java/.../ui/UiRecipeBookTest.java` — системные тесты интерфейса через Playwright с запуском полноценного сервера Spring Boot
+- `src/test/java/.../ui/pages` — классы объектной модели страниц продуктов и блюд
 
 ## Запуск
 
@@ -23,8 +23,6 @@
 ```bash
 mvn spring-boot:run
 ```
-
-После запуска открыть:
 
 ```text
 http://localhost:3000
@@ -42,17 +40,17 @@ mvn test
 - анализ граничных значений;
 - JUnit 5;
 - Playwright для системных UI-тестов;
-- Page Object Model для UI-тестов;
+- объектная модель страниц для тестов интерфейса;
 - Mockito-заглушка `ProductLookup`;
-- `@BeforeEach` setup;
-- `@BeforeAll` / `@AfterAll` suite setup/teardown для браузера Playwright;
+- настройка перед каждым тестом через `@BeforeEach`;
+- настройка и завершение набора тестов браузера Playwright через `@BeforeAll` / `@AfterAll`;
 - параметризация через `@ParameterizedTest` и `@CsvSource`.
 
-UI-тесты не мокируют backend и не используют изоляцию слоя данных: Spring Boot поднимается в
+Тесты интерфейса не имитируют серверную часть и не используют изоляцию слоя данных: Spring Boot поднимается в
 `@SpringBootTest(webEnvironment = RANDOM_PORT)`, браузер открывает реальные страницы
 `products.html` и `dishes.html`, а сценарии работают с файловой H2-базой приложения.
 
-Покрытые UI-сценарии:
+Покрытые сценарии интерфейса:
 
 - создание продукта из валидного класса данных;
 - граничные значения калорийности продукта: `-0.1`, `0`, `0.1`;
@@ -73,3 +71,8 @@ UI-тесты не мокируют backend и не используют изо�
 ```
 
 Размер порции не масштабирует КБЖУ, он хранится как отдельный атрибут блюда и используется для валидации ручных значений.
+
+## Тестирование безопасности
+
+Подробная инструкция по SAST, DAST и SCA, команды запуска, интерпретация результатов и сценарий
+демонстрации находятся в [`security/README.md`](security/README.md).

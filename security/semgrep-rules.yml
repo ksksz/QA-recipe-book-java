@@ -1,0 +1,27 @@
+rules:
+  - id: java-runtime-exec
+    languages: [java]
+    severity: ERROR
+    message: Опасный запуск команды ОС.
+    pattern: Runtime.getRuntime().exec(...)
+
+  - id: java-sql-string-concatenation
+    languages: [java]
+    severity: ERROR
+    message: SQL-запрос собран конкатенацией строк.
+    pattern: $J.query($SQL + $INPUT, ...)
+
+  - id: java-user-controlled-upload-extension
+    languages: [java]
+    severity: WARNING
+    message: Имя загружаемого файла получено от пользователя.
+    pattern: |
+      $NAME = $FILE.getOriginalFilename();
+      ...
+      $FILE.transferTo($PATH.resolve($NAME));
+
+  - id: java-hardcoded-password
+    languages: [java]
+    severity: ERROR
+    message: Пароль жестко задан в исходном коде.
+    pattern: String password = "...";
